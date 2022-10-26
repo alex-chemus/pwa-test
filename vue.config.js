@@ -2,7 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 
 const publicPath = process.env.NODE_ENV === 'production'
   //? 'https://mark.findcreek.com/'
-  ? '/mark/'
+  ? '/pwa-test/'
   : '/'
 
 module.exports = defineConfig({
@@ -11,9 +11,15 @@ module.exports = defineConfig({
   publicPath,
 
   pwa: {
-    workboxPluginMode: 'GenerateSW',
+    //workboxPluginMode: 'GenerateSW',
+    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      navigateFallback: '/index.html'
+      //navigateFallback: '/index.html',
+      swSrc: '/service-worker.js',
+      include: [
+        ///fonts\.googleapis\.com/
+        'https://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=cyrillic'
+      ]
     },
     name: 'TEST',
     themeColor: '#42A3FD',
